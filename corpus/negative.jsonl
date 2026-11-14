@@ -1,0 +1,45 @@
+{"id": "git-sha", "text": "commit 3f786850e387550fdab836ed7e6dc881de23001b\nAuthor: john <john@example.com>", "note": ""}
+{"id": "git-sha-short", "text": "git log --oneline\n3f78685 fix parser\n9a1b2c3 add tests", "note": ""}
+{"id": "uuid", "text": "request id 123e4567-e89b-12d3-a456-426614174000 finished in 12ms", "note": ""}
+{"id": "systemd-invocation-env", "text": "_SYSTEMD_INVOCATION_ID=0f2b6c1d8e9a4b3c9d7e5f1a2b3c4d5e _TRANSPORT=journal", "note": "journalctl -o verbose field; the original false alarm"}
+{"id": "systemd-invocation-env-q", "text": "INVOCATION_ID=\"0f2b6c1d8e9a4b3c9d7e5f1a2b3c4d5e\"", "note": "unit environment field"}
+{"id": "systemd-invocation-status", "text": "     Invocation: 0f2b6c1d8e9a4b3c9d7e5f1a2b3c4d5e\n", "note": "systemctl status line"}
+{"id": "machine-id", "text": "machine_id: 4d5e0f2b6c1d8e9a4b3c9d7e5f1a2b3c\n", "note": "machine id"}
+{"id": "etag", "text": "etag: \"0f2b6c1d8e9a4b3c9d7e5f1a2b3c4d5e\"", "note": "http etag"}
+{"id": "trace-id", "text": "trace_id=4bf92f3577b34da6a3ce929d0e0e4736 span=00f067aa0ba902b7", "note": "tracing ids"}
+{"id": "docker-digest", "text": "image: app@sha256:2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae", "note": "container digest"}
+{"id": "go-sum", "text": "golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=", "note": "lockfile hash"}
+{"id": "npm-lock", "text": "\"integrity\": \"sha512-3lGPzF0kq5h0x7mG9Wd2xqV6yGm0uYb1bq6w8dX0m9o2f3b0wq5zJp1w8qkL7j2m1QpCz8k8w0o3b5oC4kF3Qg==\"", "note": "lockfile hash"}
+{"id": "yarn-lock", "text": "resolved \"https://registry.example.org/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e\"", "note": "lockfile url with sha1"}
+{"id": "base64-image", "text": "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==\">", "note": "inline image"}
+{"id": "prose", "text": "Set your API key in the .env file, then restart the server. Never commit it.", "note": ""}
+{"id": "prose-kebab", "text": "ask-me-anything-about-kubernetes-clusters and disk-usage-report-for-production-hosts", "note": "words that contain sk-"}
+{"id": "code-env", "text": "const apiKey = process.env.API_KEY;\nif (!apiKey) throw new Error('missing API_KEY');", "note": "reads a secret, does not contain one"}
+{"id": "config-names", "text": "DB_PASSWORD=\nAPI_KEY=\nSECRET_KEY_BASE=changeme", "note": "names without values; changeme is too short"}
+{"id": "url-no-creds", "text": "see https://example.com/docs/getting-started?ref=readme#install", "note": ""}
+{"id": "url-user-only", "text": "ssh://john@host.example.com:22/repo.git", "note": "user without password"}
+{"id": "json", "text": "{\"user\":\"john\",\"id\":42,\"roles\":[\"admin\",\"dev\"],\"active\":true}", "note": ""}
+{"id": "timestamp-ipv6", "text": "2026-11-13T10:22:41Z fe80::1ff:fe23:4567:890a", "note": ""}
+{"id": "ssh-public-key", "text": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl john@laptop", "note": "public key"}
+{"id": "long-identifier", "text": "TheQuickBrownFoxJumpsOverTheLazyDogAndKeepsRunningThroughTheForest", "note": ""}
+{"id": "shell-listing", "text": "-rw-r--r-- 1 john john 4096 Nov 13 10:22 README.md\ndrwxr-xr-x 2 john john 4096 Nov 13 10:22 src", "note": ""}
+{"id": "md5-with-label", "text": "md5: d41d8cd98f00b204e9800998ecf8427e", "note": "labelled md5"}
+{"id": "lookalike-prefixes", "text": "hf_transfer is enabled; use gsk_ prefix docs; sk_live_ is a Stripe prefix; ghp_ tokens are 40 chars long", "note": ""}
+{"id": "release-name", "text": "release-v1.2.3-us-east-1 deployed to us12 and eu-west-2", "note": ""}
+{"id": "short-sig", "text": "https://example.com/a?sig=abc123&x=1", "note": "too short to be a signature"}
+{"id": "short-token-field", "text": "{\"token\": \"abc\", \"password\": \"x\"}", "note": "values under the minimum length"}
+{"id": "placeholder-json", "text": "{\"password\": \"<your-password-here>\", \"api_key\": \"${API_KEY}\"}", "note": "placeholders"}
+{"id": "placeholder-env", "text": "DB_PASSWORD=${DB_PASSWORD}\nAPI_KEY={{ api_key }}\nSECRET=changeme-changeme-changeme-0000", "note": ""}
+{"id": "env-commit", "text": "COMMIT_SHA=3f786850e387550fdab836ed7e6dc881de23001b\nBUILD_ID=a1b2c3d4e5f60718293a4b5c6d7e8f90", "note": "hashes with telling names"}
+{"id": "env-image", "text": "IMAGE=registry.example.com/team/app:2026.11.13-build-4521\nSERVICE_URL=https://example.com/aVeryLongPathSegmentWithMixedCase123456789", "note": ""}
+{"id": "cookie-benign", "text": "Cookie: theme=dark; lang=en; tz=UTC", "note": ""}
+{"id": "order-number", "text": "order 1234567890123456 shipped at 1700000000000", "note": "not a card: fails Luhn or issuer prefix"}
+{"id": "machine-learning-prose", "text": "the machine learning model password policy was reviewed", "note": ""}
+{"id": "kube-no-secret", "text": "users:\n- name: john\n  user:\n    exec:\n      command: aws", "note": ""}
+{"id": "version-strings", "text": "go1.22.4 linux/amd64 node v20.11.1 python 3.12.3 sha256 truncated 3f786850", "note": ""}
+{"id": "docs-snippet", "text": "Set NPM_TOKEN in CI. The _authToken line goes in .npmrc. Use gh auth login to sign in.", "note": "text about secrets without values"}
+{"id": "uuid-in-json", "text": "{\"id\": \"123e4567-e89b-12d3-a456-426614174000\", \"request_id\": \"4bf92f3577b34da6a3ce929d0e0e4736\"}", "note": ""}
+{"id": "env-short-benign", "text": "PASSWORD_MIN_LENGTH=12\nTOKEN_FILE=/run/secrets/token\nSECRET_KEY_ID=abc123456\nAPI_KEY_URL=https://example.com/keys\nDEBUG_TOKEN_ENABLED=true", "note": ""}
+{"id": "env-short-placeholder", "text": "DB_PASSWORD=changeme\nAPI_TOKEN=your-token-here\nSECRET=xxxxxxxxxx\nTOKEN=${TOKEN}", "note": ""}
+{"id": "code-python", "text": "password = getpass.getpass('Password: ')\ntoken = os.environ['GITHUB_TOKEN']", "note": "an assignment such as `password = getpass.getpass(...)` has the shape of `password=<value>` (postgres-password)", "known_false_alarm": true}
+{"id": "md5sum-output", "text": "d41d8cd98f00b204e9800998ecf8427e  empty.txt\n", "note": "md5sum output: a bare 32-hex value followed by a space has the exact shape of a Twilio auth token", "known_false_alarm": true}

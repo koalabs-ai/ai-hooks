@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/koalabs-ai/ai-hooks/blob/main/internal/guard/rules.schema.json",
+  "title": "ai-hooks rules file",
+  "description": "Optional user rules, merged on top of the built-in defaults. Location: $AI_HOOKS_RULES or <config dir>/ai-hooks/rules.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "comment": {"type": "string"},
+    "redact_rules": {
+      "type": "array",
+      "description": "A rule fires when every regex in match matches some line of the lower-cased command, none of unless does, and the command is not already piped through ai-hooks redact/exec.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "why", "match"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "why": {"type": "string", "minLength": 1, "description": "One line shown to the agent."},
+          "match": {"type": "array", "minItems": 1, "items": {"type": "string", "description": "Go (RE2) regular expression"}},
+          "unless": {"type": "array", "items": {"type": "string", "description": "Go (RE2) regular expression"}}
+        }
+      }
+    },
+    "secret_paths": {"type": "array", "items": {"type": "string"}, "description": "Extra regex alternatives for a file that holds secrets (structural rule print-secret-file)."},
+    "disable": {"type": "array", "items": {"type": "string"}, "description": "Rule ids (redact or structural) to switch off."},
+    "allow": {"type": "array", "items": {"type": "string"}, "description": "A command matching any of these regexes is never blocked."},
+    "redactors": {"type": "array", "items": {"type": "string"}, "description": "Regexes that mean 'this command is piped through a redactor' (for a redactor other than ai-hooks)."}
+  }
+}

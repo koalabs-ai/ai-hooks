@@ -1,0 +1,128 @@
+{"id": "stripe-live-1", "type": "stripe-secret-key-live", "template": "charge the card with [[sk_live_{{alnum:24}}]] and log the result"}
+{"id": "stripe-test-1", "type": "stripe-secret-key-test", "template": "STRIPE test mode: [[sk_test_{{alnum:24}}]]"}
+{"id": "stripe-restricted-1", "type": "stripe-restricted-key", "template": "restricted key [[rk_live_{{alnum:24}}]] for reporting"}
+{"id": "stripe-publishable-1", "type": "stripe-publishable-key", "template": "frontend uses [[pk_test_{{alnum:24}}]]"}
+{"id": "github-pat-1", "type": "github-token", "template": "gh auth login --with-token <<< [[ghp_{{alnum:36}}]]"}
+{"id": "github-pat-2", "type": "github-token", "template": "remote: using token [[ghs_{{alnum:36}}]] for user john"}
+{"id": "github-fine-pat-1", "type": "github-fine-grained-token", "template": "token: [[github_pat_{{alnum:22}}_{{alnum:40}}]]"}
+{"id": "gitlab-pat-1", "type": "gitlab-personal-token", "template": "git clone https://gitlab.example.com/john/app (token [[glpat-{{alnum:20}}]])"}
+{"id": "supabase-secret-1", "type": "supabase-secret-key", "template": "service key [[sb_secret_{{alnum:24}}]]"}
+{"id": "supabase-publishable-1", "type": "supabase-publishable-key", "template": "anon key [[sb_publishable_{{alnum:24}}]]"}
+{"id": "resend-1", "type": "resend-api-key", "template": "mail key [[re_{{alnum:10}}_{{alnum:24}}]] sent"}
+{"id": "forgejo-pat-1", "type": "forgejo-token", "template": "pat [[forgejo_{{hexl:40}}]]"}
+{"id": "forgejo-token-1", "type": "git-host-api-token", "template": "curl -H \"Authorization: token [[{{hexl:40}}]]\" https://git.example.com/api/v1/user"}
+{"id": "aws-key-id-1", "type": "aws-access-key", "template": "AWS_ACCESS_KEY_ID=[[AKIAIOSFODNN7EXAMPLE]] (the example id from the AWS docs)"}
+{"id": "aws-key-id-2", "type": "aws-access-key", "template": "found key [[AKIA{{upper:16}}]] in the logs"}
+{"id": "aws-secret-1", "type": "aws-secret-key", "template": "aws_secret_access_key = [[wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY]]"}
+{"id": "google-api-1", "type": "google-api-key", "template": "maps key [[AIza{{b64url:35}}]]"}
+{"id": "zai-api-1", "type": "zai-api-key", "template": "api key [[{{hexl:32}}.{{alnum:20}}]]"}
+{"id": "anthropic-1", "type": "anthropic-api-key", "template": "ANTHROPIC key [[sk-ant-api03-{{b64url:40}}]] loaded"}
+{"id": "openai-1", "type": "openai-api-key", "template": "client = OpenAI(api_key=\"[[sk-proj-{{b64url:40}}]]\")"}
+{"id": "slack-bot-1", "type": "slack-token", "template": "slack [[xoxb-{{digits:12}}-{{alnum:24}}]]"}
+{"id": "chatwoot-1", "type": "chatwoot-access-token", "template": "CHATWOOT_BOT_TOKEN=[[{{alnum:24}}]]"}
+{"id": "twilio-sid-1", "type": "twilio-api-key-secret", "template": "api key secret [[SK{{hexl:32}}]] ok"}
+{"id": "twilio-auth-1", "type": "twilio-auth-token", "template": "twilio auth [[{{hexl:32}}]] \"john\""}
+{"id": "telegram-1", "type": "telegram-bot-token", "template": "bot [[{{digits:10}}:{{b64url:35}}]] started"}
+{"id": "mp-token-1", "type": "mercadopago-access-token", "template": "mercado pago [[APP_USR-{{alnum:30}}]]"}
+{"id": "mp-test-1", "type": "mercadopago-test-token", "template": "sandbox [[TEST-{{digits:12}}-{{digits:6}}-{{hexl:32}}-{{digits:8}}]]"}
+{"id": "jwt-1", "type": "jwt", "template": "session=[[eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c]]"}
+{"id": "jwt-2", "type": "jwt", "template": "id_token: [[eyJ{{b64url:30}}.eyJ{{b64url:60}}.{{b64url:43}}]]"}
+{"id": "bearer-1", "type": "bearer-token", "template": "curl -H 'Authorization: Bearer [[{{b64url:40}}]]' https://api.example.com/me"}
+{"id": "basic-auth-1", "type": "basic-auth-credentials", "template": "Proxy-Authorization: Basic [[{{b64:28}}]]"}
+{"id": "http-header-1", "type": "http-auth-header", "template": "x-api-key: [[{{alnum:32}}]]"}
+{"id": "uri-1", "type": "url-password", "template": "DATABASE_URL=postgres://john:[[{{alnum:16}}]]@db.example.com:5432/app"}
+{"id": "uri-2", "type": "url-password", "template": "redis://default:[[{{alnum:20}}]]@cache.example.com:6379"}
+{"id": "uri-3", "type": "url-password", "template": "git clone https://john:[[{{alnum:20}}]]@git.example.com/john/app.git"}
+{"id": "libpq-1", "type": "postgres-password", "template": "host=db.example.com user=john password=[[{{alnum:14}}]] dbname=app"}
+{"id": "env-hex-1", "type": "env-secret-hex", "template": "SESSION_SECRET=[[{{hexl:28}}]]"}
+{"id": "env-token-1", "type": "env-secret", "template": "SERVICE_API_KEY=[[{{alnum:30}}]]"}
+{"id": "env-token-2", "type": "env-secret", "template": "export DB_PASSWORD=\"[[{{alnum:24}}]]\""}
+{"id": "label-hex-1", "type": "labelled-secret-hex", "template": "Secret key: [[{{hexl:40}}]]"}
+{"id": "label-token-1", "type": "labelled-secret", "template": "password: \"[[{{alnum:24}}]]\""}
+{"id": "pem-1", "type": "private-key-pem", "template": "[[-----BEGIN PRIVATE KEY-----\n{{b64:64}}\n{{b64:64}}\n-----END PRIVATE KEY-----]]"}
+{"id": "pem-2", "type": "private-key-pem", "template": "[[-----BEGIN OPENSSH PRIVATE KEY-----\n{{b64:70}}\n-----END OPENSSH PRIVATE KEY-----]]"}
+{"id": "gcp-oauth-1", "type": "gcp-oauth-client-secret", "template": "client_secret=[[GOCSPX-{{b64url:28}}]]"}
+{"id": "gcp-sa-id-1", "type": "gcp-service-account-key-id", "template": "\"private_key_id\": \"[[{{hexl:40}}]]\","}
+{"id": "aws-temp-1", "type": "aws-temporary-access-key", "template": "[[ASIA{{upper:16}}]] from sts"}
+{"id": "aws-session-1", "type": "aws-session-token", "template": "aws_session_token = [[{{b64:120}}]]"}
+{"id": "azure-storage-1", "type": "azure-storage-account-key", "template": "DefaultEndpointsProtocol=https;AccountName=demo;AccountKey=[[{{b64:86}}==]];EndpointSuffix=core.windows.net"}
+{"id": "azure-sas-1", "type": "azure-sas-token", "template": "https://demo.blob.core.windows.net/c/f.txt?sv=2022-11-02&se=2026-12-01&sp=r&sig=[[{{b64:43}}%3D]]"}
+{"id": "azure-client-1", "type": "azure-client-secret", "template": "AZURE_CLIENT_SECRET [[abc8Q~{{alnum:34}}]]"}
+{"id": "do-1", "type": "digitalocean-token", "template": "doctl auth init -t [[dop_v1_{{hexl:64}}]]"}
+{"id": "cf-token-1", "type": "cloudflare-api-token", "template": "[[cfut_{{alnum:44}}]]"}
+{"id": "cf-key-1", "type": "cloudflare-api-key", "template": "cloudflare api token: [[{{alnum:40}}]]"}
+{"id": "hetzner-1", "type": "hetzner-api-token", "template": "hetzner cloud api token: [[{{alnum:64}}]]"}
+{"id": "openrouter-1", "type": "openrouter-api-key", "template": "[[sk-or-v1-{{hexl:64}}]]"}
+{"id": "openai-svc-1", "type": "openai-service-key", "template": "[[sk-svcacct-{{b64url:60}}]]"}
+{"id": "hf-1", "type": "huggingface-token", "template": "huggingface-cli login --token [[hf_{{alnum:34}}]]"}
+{"id": "replicate-1", "type": "replicate-api-token", "template": "[[r8_{{alnum:37}}]]"}
+{"id": "groq-1", "type": "groq-api-key", "template": "[[gsk_{{alnum:52}}]]"}
+{"id": "pplx-1", "type": "perplexity-api-key", "template": "[[pplx-{{alnum:48}}]]"}
+{"id": "xai-1", "type": "xai-api-key", "template": "[[xai-{{alnum:80}}]]"}
+{"id": "eleven-1", "type": "elevenlabs-api-key", "template": "[[sk_{{hexl:48}}]]"}
+{"id": "nvidia-1", "type": "nvidia-api-key", "template": "[[nvapi-{{b64url:64}}]]"}
+{"id": "langsmith-1", "type": "langsmith-api-key", "template": "[[lsv2_pt_{{hexl:32}}_{{hexl:10}}]]"}
+{"id": "together-1", "type": "together-ai-key", "template": "[[tgp_v1_{{b64url:43}}]]"}
+{"id": "mistral-1", "type": "llm-provider-key", "template": "mistral api key: [[{{alnum:32}}]]"}
+{"id": "gitlab-runner-1", "type": "gitlab-token", "template": "[[glrt-{{b64url:24}}]]"}
+{"id": "atlassian-1", "type": "atlassian-token", "template": "[[ATATT3{{b64url:60}}]]"}
+{"id": "npm-1", "type": "npm-access-token", "template": "[[npm_{{alnum:36}}]]"}
+{"id": "npmrc-1", "type": "npm-auth", "template": "//registry.npmjs.org/:_authToken=[[{{alnum:30}}]]"}
+{"id": "pypi-1", "type": "pypi-api-token", "template": "[[pypi-AgEIcHlwaS5vcmc{{b64url:60}}]]"}
+{"id": "crates-1", "type": "crates-io-token", "template": "token = \"[[cio{{alnum:32}}]]\""}
+{"id": "rubygems-1", "type": "rubygems-api-key", "template": "[[rubygems_{{hexl:48}}]]"}
+{"id": "dockerhub-1", "type": "dockerhub-token", "template": "[[dckr_pat_{{b64url:27}}]]"}
+{"id": "dockercfg-1", "type": "docker-registry-auth", "template": "\"auth\": \"[[{{b64:40}}]]\""}
+{"id": "whsec-1", "type": "stripe-webhook-secret", "template": "[[whsec_{{alnum:32}}]]"}
+{"id": "braintree-1", "type": "braintree-access-token", "template": "[[access_token$production${{hexl:16}}${{hexl:32}}]]"}
+{"id": "square-1", "type": "square-access-token", "template": "[[sq0atp-{{b64url:22}}]]"}
+{"id": "shopify-1", "type": "shopify-access-token", "template": "[[shpat_{{hexl:32}}]]"}
+{"id": "slack-app-1", "type": "slack-app-token", "template": "[[xapp-1-A{{digits:10}}-{{digits:13}}-{{hexl:64}}]]"}
+{"id": "slack-hook-1", "type": "slack-webhook-url", "template": "[[https://hooks.slack.com/services/T{{upper:8}}/B{{upper:10}}/{{alnum:24}}]]"}
+{"id": "discord-hook-1", "type": "discord-webhook-url", "template": "[[https://discord.com/api/webhooks/{{digits:18}}/{{b64url:68}}]]"}
+{"id": "discord-bot-1", "type": "discord-bot-token", "template": "[[MTk{{alnum:21}}.{{alnum:6}}.{{b64url:30}}]]"}
+{"id": "sendgrid-1", "type": "sendgrid-api-key", "template": "[[SG.{{b64url:22}}.{{b64url:43}}]]"}
+{"id": "mailgun-1", "type": "mailgun-api-key", "template": "[[key-{{hexl:32}}]]"}
+{"id": "mailchimp-1", "type": "mailchimp-api-key", "template": "[[{{hexl:32}}-us12]]"}
+{"id": "sentry-1", "type": "sentry-auth-token", "template": "[[sntrys_{{b64:60}}]]"}
+{"id": "newrelic-1", "type": "newrelic-api-key", "template": "[[NRAK-{{upper:27}}]]"}
+{"id": "netlify-1", "type": "netlify-access-token", "template": "[[nfp_{{alnum:36}}]]"}
+{"id": "flyio-1", "type": "flyio-token", "template": "[[fo1_{{b64url:43}}]]"}
+{"id": "heroku-1", "type": "heroku-api-key", "template": "[[HRKU-AA{{b64url:58}}]]"}
+{"id": "supabase-pat-1", "type": "supabase-access-token", "template": "[[sbp_{{hexl:40}}]]"}
+{"id": "pscale-1", "type": "planetscale-token", "template": "[[pscale_tkn_{{b64url:40}}]]"}
+{"id": "linear-1", "type": "linear-api-key", "template": "[[lin_api_{{alnum:40}}]]"}
+{"id": "notion-1", "type": "notion-token", "template": "[[ntn_{{alnum:44}}]]"}
+{"id": "airtable-1", "type": "airtable-token", "template": "[[pat{{alnum:14}}.{{hexl:64}}]]"}
+{"id": "doppler-1", "type": "doppler-token", "template": "[[dp.pt.{{alnum:43}}]]"}
+{"id": "op-1", "type": "onepassword-service-account-token", "template": "[[ops_eyJ{{b64:120}}]]"}
+{"id": "vault-1", "type": "hashicorp-vault-token", "template": "[[hvs.{{b64url:60}}]]"}
+{"id": "tfc-1", "type": "terraform-cloud-token", "template": "[[{{alnum:14}}.atlasv1.{{b64url:64}}]]"}
+{"id": "pulumi-1", "type": "pulumi-access-token", "template": "[[pul-{{hexl:40}}]]"}
+{"id": "tailscale-1", "type": "tailscale-key", "template": "tailscale up --auth-key=[[tskey-auth-k{{alnum:10}}CNTRL-{{alnum:30}}]]"}
+{"id": "headscale-1", "type": "headscale-preauth-key", "template": "preauth key: [[{{hexl:48}}]]"}
+{"id": "wireguard-1", "type": "wireguard-private-key", "template": "[Interface]\nPrivateKey = [[{{b64:43}}=]]\nAddress = 10.0.0.2/32"}
+{"id": "age-1", "type": "age-secret-key", "template": "[[AGE-SECRET-KEY-1{{bech32u:58}}]]"}
+{"id": "pgp-1", "type": "pgp-private-key", "template": "[[-----BEGIN PGP PRIVATE KEY BLOCK-----\n{{b64:64}}\n{{b64:64}}\n-----END PGP PRIVATE KEY BLOCK-----]]"}
+{"id": "putty-1", "type": "putty-private-key", "template": "PuTTY-User-Key-File-3: ssh-ed25519\nPrivate-Lines: 1\n[[{{b64:44}}]]\nPrivate-MAC: x"}
+{"id": "jwe-1", "type": "jwe", "template": "[[eyJ{{b64url:20}}.{{b64url:30}}.{{b64url:20}}.{{b64url:20}}.{{b64url:20}}]]"}
+{"id": "totp-1", "type": "totp-seed", "template": "otpauth://totp/john@example.com?secret=[[{{base32:32}}]]&issuer=Demo"}
+{"id": "totp-mig-1", "type": "totp-migration-export", "template": "[[otpauth-migration://offline?data={{b64url:60}}]]"}
+{"id": "netrc-1", "type": "netrc-password", "template": "machine example.com login john password [[{{alnum:16}}]]"}
+{"id": "kube-1", "type": "kubeconfig-credential", "template": "users:\n- name: john\n  user:\n    token: [[{{b64url:40}}]]"}
+{"id": "header-extra-1", "type": "http-auth-header", "template": "x-gitlab-token: [[{{alnum:20}}]]"}
+{"id": "cli-u-1", "type": "cli-basic-auth-password", "template": "curl -u john:[[{{alnum:14}}]] https://api.example.com/me"}
+{"id": "cli-flag-1", "type": "cli-secret-argument", "template": "mytool login --password [[{{alnum:16}}]]"}
+{"id": "json-field-1", "type": "json-secret-field", "template": "{\"client_secret\": \"[[{{alnum:30}}]]\"}"}
+{"id": "entropy-1", "type": "env-high-entropy", "template": "STRIPE_ACCOUNT=[[{{alnum:40}}]]"}
+{"id": "cookie-1", "type": "cookie-secret", "template": "Cookie: theme=dark; session_id=[[{{alnum:32}}]]"}
+{"id": "card-1", "type": "credit-card", "template": "card [[4242424242424242]] expires 12/30"}
+{"id": "card-2", "type": "credit-card", "template": "amex [[378282246310005]]"}
+{"id": "pem-truncated-1", "type": "private-key-pem-truncated", "template": "output cut here:\n-----BEGIN PRIVATE KEY-----\n[[{{b64:64}}\n{{b64:64}}]]"}
+{"id": "env-short-1", "type": "env-secret-short", "template": "APP_DB_PASSWORD=[[{{alnum:9}}]]"}
+{"id": "env-short-2", "type": "env-secret-short", "template": "export ADMIN_TOKEN=\"[[{{alnum:8}}]]\""}
+{"id": "miss-bare-token", "type": "none", "template": "TOKEN=[[{{alnum:4}}]]", "known_miss": true, "note": "a bare TOKEN= with a short value (under 6 characters) is not matched; longer values after TOKEN-like names are redacted as env-secret-short"}
+{"id": "miss-base64", "type": "none", "template": "payload [[c2stcHJvai1BQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWjEyMzQ1Ng==]]", "known_miss": true, "note": "base64 of a key (the model could decode it)"}
+{"id": "miss-spaced", "type": "none", "template": "key: [[sk- proj- abcdefghij klmnopqrst uvwxyz0123]]", "known_miss": true, "note": "a key split by spaces"}
+{"id": "miss-prose-password", "type": "none", "template": "my password is [[Tr0ub4dor&3xylophone]]", "known_miss": true, "note": "a password in prose with no label shape"}
+{"id": "miss-short-label", "type": "none", "template": "pwd = '[[hunter2]]'", "known_miss": true, "note": "values shorter than the minimum length of every detector"}

@@ -1,0 +1,18 @@
+# The corpus is made of FAKE secrets on purpose (documented vendor examples and
+# synthetic values generated at run time from templates). Everything else must stay clean.
+title = "ai-hooks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "intentional fakes"
+paths = [
+  '''^corpus/''',
+  '''^internal/.*_test\.go$''',
+  '''^internal/redact/extra\.go$''',   # detector descriptions that quote token prefixes
+  '''^docs/.*\.md$''',
+  '''^README\.md$''',
+  '''^demo/record\.py$''',
+  '''^site/''',
+]

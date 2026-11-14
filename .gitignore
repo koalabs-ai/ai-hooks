@@ -1,0 +1,4 @@
+dist/
+demo/out/transcript.json
+*.test
+.DS_Store
