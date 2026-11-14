@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version-file: go.mod
+          go-version: stable  # gitleaks needs a newer Go than go.mod pins; this job builds no project code
       - name: gitleaks (allow-list for the intentional fakes in corpus/)
         run: |
           go install github.com/gitleaks/gitleaks/v8@v8.30.1
