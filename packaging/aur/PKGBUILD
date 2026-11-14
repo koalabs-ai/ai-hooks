@@ -1,0 +1,29 @@
+# Maintainer: <your name> <your email>   (set before submitting to the AUR)
+pkgname=ai-hooks
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Command guard and output redactor that keep secrets out of AI coding agent transcripts"
+arch=('x86_64' 'aarch64')
+url="https://github.com/koalabs-ai/ai-hooks"
+license=('Apache-2.0')
+makedepends=('go')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP') # replace with the real sum at release time
+
+build() {
+  cd "$pkgname-$pkgver"
+  export CGO_ENABLED=0 GOFLAGS="-trimpath -buildmode=exe -mod=readonly"
+  go build -ldflags "-s -w -X main.version=$pkgver" -o ai-hooks ./cmd/ai-hooks
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+  go test ./...
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  install -Dm755 ai-hooks "$pkgdir/usr/bin/ai-hooks"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 NOTICE "$pkgdir/usr/share/licenses/$pkgname/NOTICE"
+}

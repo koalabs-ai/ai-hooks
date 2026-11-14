@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.koalabs-ai/ai-hooks",
+  "description": "Guard and redactor for secrets: block risky shell commands, mask secret-shaped output. No network.",
+  "version": "0.1.0",
+  "repository": {"url": "https://github.com/koalabs-ai/ai-hooks", "source": "github"},
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/koalabs-ai/ai-hooks:0.1.0",
+      "transport": {"type": "stdio"},
+      "packageArguments": [{"type": "positional", "value": "mcp"}]
+    }
+  ]
+}

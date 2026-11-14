@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security report (a way around the guard, a leak in ai-hooks itself)
+    url: https://github.com/koalabs-ai/ai-hooks/security/advisories/new
+    about: See SECURITY.md. Do not open a public issue for these.

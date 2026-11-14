@@ -1,0 +1,18 @@
+{
+  "name": "ai-hooks",
+  "owner": {
+    "name": "KOA Labs"
+  },
+  "plugins": [
+    {
+      "name": "ai-hooks",
+      "source": "./",
+      "description": "Guard and redactor that keep secrets out of Claude Code transcripts. Requires the ai-hooks binary on PATH.",
+      "author": {
+        "name": "KOA Labs",
+        "url": "https://koalabs.ai"
+      }
+    }
+  ],
+  "description": "Guard and redactor that keep secrets out of AI coding agent transcripts."
+}

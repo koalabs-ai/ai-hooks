@@ -1,0 +1,28 @@
+name: False alarm (something harmless was redacted or blocked)
+description: ai-hooks changed or refused something that holds no secret.
+labels: [false-alarm]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use a FAKE example. Never paste a real secret, a real .env or a real transcript.
+  - type: textarea
+    id: input
+    attributes:
+      label: Input (fake or harmless)
+      description: The text, or the command, exactly as it was given.
+    validations: {required: true}
+  - type: textarea
+    id: output
+    attributes:
+      label: What ai-hooks did
+      description: The `<REDACTED:type:...>` it produced, or the guard message.
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes:
+      label: Output of `ai-hooks version`
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is not a secret

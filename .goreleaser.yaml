@@ -1,0 +1,36 @@
+# Static binaries, checksums and an SBOM for each release. Run: goreleaser release --clean
+# (not run here: goreleaser is not installed on the machine this was prepared on)
+version: 2
+project_name: ai-hooks
+before:
+  hooks:
+    - go test ./...
+builds:
+  - id: ai-hooks
+    main: ./cmd/ai-hooks
+    binary: ai-hooks
+    env: [CGO_ENABLED=0]
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    flags: [-trimpath]
+    ldflags: ["-s -w -X main.version={{.Version}}"]
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - {goos: windows, formats: [zip]}
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files: [LICENSE, NOTICE, README.md]
+checksum:
+  name_template: checksums.txt
+sboms:
+  - artifacts: archive
+changelog:
+  sort: asc
+  filters:
+    exclude: ["^docs:", "^test:", "^chore:"]
+# Enable once the tap repository exists (see packaging/homebrew/ai-hooks.rb):
+# brews:
+#   - repository: {owner: OWNER, name: homebrew-tap}
+#     homepage: https://github.com/koalabs-ai/ai-hooks
+#     description: "Command guard and output redactor that keep secrets out of AI agent transcripts"
+#     license: Apache-2.0

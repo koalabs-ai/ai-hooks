@@ -1,0 +1,59 @@
+name: 'ai-hooks'
+description: 'Scan a repository for secrets (SARIF) or run a command with its output redacted, using the ai-hooks binary. No network access beyond downloading the release.'
+author: 'KOA Labs'
+branding:
+  icon: shield
+  color: red
+inputs:
+  version:
+    description: 'ai-hooks version to install, without the v (default: latest release)'
+    required: false
+    default: ''
+  scan-path:
+    description: 'Path to scan for secrets. When set, a SARIF report is written to ai-hooks.sarif (values are never included).'
+    required: false
+    default: ''
+  fail-on-findings:
+    description: 'Fail the step when the scan finds something'
+    required: false
+    default: 'true'
+  run:
+    description: 'A shell command to run through ai-hooks exec (guarded, output redacted)'
+    required: false
+    default: ''
+outputs:
+  sarif:
+    description: 'Path of the SARIF report (when scan-path is set)'
+    value: ${{ steps.scan.outputs.sarif }}
+runs:
+  using: composite
+  steps:
+    - name: Install ai-hooks (checksum-verified)
+      shell: bash
+      env:
+        AI_HOOKS_VERSION: ${{ inputs.version }}
+        AI_HOOKS_PREFIX: ${{ runner.temp }}/ai-hooks-bin
+        AI_HOOKS_REPO: koalabs-ai/ai-hooks
+      run: |
+        "$GITHUB_ACTION_PATH/install.sh"
+        echo "$AI_HOOKS_PREFIX" >> "$GITHUB_PATH"
+    - name: Scan
+      id: scan
+      if: inputs.scan-path != ''
+      shell: bash
+      env:
+        SCAN_PATH: ${{ inputs.scan-path }}
+        FAIL: ${{ inputs.fail-on-findings }}
+      run: |
+        set +e
+        ai-hooks scan --format sarif -- "$SCAN_PATH" > ai-hooks.sarif
+        rc=$?
+        echo "sarif=ai-hooks.sarif" >> "$GITHUB_OUTPUT"
+        if [ "$rc" = 1 ] && [ "$FAIL" = "true" ]; then echo "ai-hooks found secret-shaped values (see ai-hooks.sarif)"; exit 1; fi
+        if [ "$rc" -gt 1 ]; then exit "$rc"; fi
+    - name: Run with redacted output
+      if: inputs.run != ''
+      shell: bash
+      env:
+        AI_HOOKS_RUN: ${{ inputs.run }}
+      run: ai-hooks exec -- "$AI_HOOKS_RUN"

@@ -1,0 +1,19 @@
+{
+  "name": "ai-hooks",
+  "version": "0.1.0",
+  "description": "Stop Claude Code from printing secrets into the transcript: a guard for risky shell commands and a redactor for command output. Needs the ai-hooks binary on PATH.",
+  "license": "Apache-2.0",
+  "keywords": [
+    "secrets",
+    "redaction",
+    "security",
+    "hooks"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "author": {
+    "name": "KOA Labs",
+    "url": "https://koalabs.ai"
+  },
+  "homepage": "https://github.com/koalabs-ai/ai-hooks",
+  "repository": "https://github.com/koalabs-ai/ai-hooks"
+}
