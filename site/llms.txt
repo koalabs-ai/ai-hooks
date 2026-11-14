@@ -1,0 +1,26 @@
+# ai-hooks
+
+> ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with <REDACTED:type:fingerprint>. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access.
+
+Status: pre-release, not yet published. Everything below describes what exists in the repository today.
+
+What it does:
+- `ai-hooks guard`: decides before a shell command runs whether it is likely to print secrets (reading .env files, journalctl -u, docker inspect, printenv, curl -v with a token...). Exit 0 allow, 2 block, with a one-line instruction.
+- `ai-hooks redact`: filter from stdin to stdout replacing secret-shaped strings with <REDACTED:type:fingerprint>. About 40 detectors. `--json` reports counts by type, never values.
+- `ai-hooks hook claude|kimi`: hook entry points. Verified in live sessions: Claude Code (guard and output redaction), Kimi Code (guard only).
+- `ai-hooks exec -- cmd`: guard, run, redact, keep the exit code.
+
+What it is not: a secret manager, a repository scanner (use gitleaks, trufflehog or detect-secrets for that), or a guarantee. Detection is by shape; known misses are listed on the numbers page. It does not stop an agent that deliberately encodes its output.
+
+Not tested: Codex CLI, opencode, Cursor, Gemini CLI and other harnesses (their vendors document hooks; no support is claimed).
+
+## Docs
+- [Home](https://koalabs-ai.github.io/ai-hooks/): overview and demo
+- [Claude Code](https://koalabs-ai.github.io/ai-hooks/claude-code.html)
+- [Kimi Code](https://koalabs-ai.github.io/ai-hooks/kimi-code.html)
+- [Any shell](https://koalabs-ai.github.io/ai-hooks/any-shell.html)
+- [Numbers](https://koalabs-ai.github.io/ai-hooks/numbers.html): measured on one machine, with method
+- [FAQ](https://koalabs-ai.github.io/ai-hooks/faq.html)
+- [Source and design note](https://github.com/koalabs-ai/ai-hooks)
+
+License: Apache-2.0.

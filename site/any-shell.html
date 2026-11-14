@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks for any shell: redact secrets from terminal output</title>
+<meta name="description" content="Redact secrets from terminal output with a pipe, guard a command before it runs, or wrap it with ai-hooks exec. Works with any agent that runs shell commands.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/any-shell.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks for any shell: redact secrets from terminal output"><meta property="og:description" content="Redact secrets from terminal output with a pipe, guard a command before it runs, or wrap it with ai-hooks exec. Works with any agent that runs shell commands.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/any-shell.html"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks for any shell: redact secrets from terminal output">
+<meta name="twitter:description" content="Redact secrets from terminal output with a pipe, guard a command before it runs, or wrap it with ai-hooks exec. Works with any agent that runs shell commands."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a><a href="claude-code.html">Claude Code</a><a href="kimi-code.html">Kimi Code</a><a href="opencode.html">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html" aria-current="page">Any shell</a><a href="numbers.html">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks for any shell: redact secrets from terminal output</h1>
+<p><strong>Status: verified.</strong> This is the mode the tests and the demo use.</p>
+<h2>Redact secrets from terminal output</h2>
+<pre><code>kubectl logs deploy/api 2&gt;&amp;1 | ai-hooks redact
+docker compose logs | ai-hooks redact --stream
+some-cmd | ai-hooks redact --json &gt; /dev/null     # {&quot;redacted&quot;:2,&quot;by_type&quot;:{...}}: counts only</code></pre>
+<h2>Guard, then run, then redact</h2>
+<pre><code>ai-hooks guard -- &#x27;cat .env&#x27;        # exit 2, one line on stderr
+ai-hooks exec -- cat .env           # guard, run, redact the output, keep the exit code</code></pre>
+<h2>Your own rules</h2>
+<p>Add rules, disable defaults or allow patterns in <code>~/.config/ai-hooks/rules.json</code>. <code>ai-hooks rules</code> prints the defaults. See the <a href="https://github.com/koalabs-ai/ai-hooks/blob/main/docs/DESIGN.md">design note</a>.</p>
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>

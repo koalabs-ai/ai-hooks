@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks for Claude Code: stop it printing secrets</title>
+<meta name="description" content="How to stop Claude Code from printing secrets: a working PreToolUse and PostToolUse hook example with ai-hooks, verified on Claude Code 2.1.325.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/claude-code.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks for Claude Code: stop it printing secrets"><meta property="og:description" content="How to stop Claude Code from printing secrets: a working PreToolUse and PostToolUse hook example with ai-hooks, verified on Claude Code 2.1.325.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/claude-code.html"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks for Claude Code: stop it printing secrets">
+<meta name="twitter:description" content="How to stop Claude Code from printing secrets: a working PreToolUse and PostToolUse hook example with ai-hooks, verified on Claude Code 2.1.325."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a><a href="claude-code.html" aria-current="page">Claude Code</a><a href="kimi-code.html">Kimi Code</a><a href="opencode.html">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html">Any shell</a><a href="numbers.html">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks for Claude Code: stop it printing secrets</h1>
+<p><strong>Status: verified</strong> on Claude Code 2.1.325: a real session was blocked from running <code>journalctl -u app</code>, and the output of a harmless command was rewritten before the model saw it.</p>
+<h2>How to prevent Claude Code from printing secrets</h2>
+<p>Add both hooks to <code>~/.claude/settings.json</code>. <code>ai-hooks config claude</code> prints this with your binary path.</p>
+<pre><code>{
+  &quot;hooks&quot;: {
+    &quot;PreToolUse&quot;:  [{&quot;matcher&quot;: &quot;Bash&quot;, &quot;hooks&quot;: [{&quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;ai-hooks hook claude&quot;, &quot;timeout&quot;: 10}]}],
+    &quot;PostToolUse&quot;: [{&quot;matcher&quot;: &quot;Bash&quot;, &quot;hooks&quot;: [{&quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;ai-hooks hook claude&quot;, &quot;timeout&quot;: 10}]}]
+  }
+}</code></pre>
+<h2>A Claude Code PreToolUse hook example</h2>
+<p>The hook reads the payload on standard input and, for a risky command, answers with <code>permissionDecision: deny</code> and a reason. The model reads the reason and re-runs the command through the redactor.</p>
+<pre><code>echo &#x27;{&quot;hook_event_name&quot;:&quot;PreToolUse&quot;,&quot;tool_name&quot;:&quot;Bash&quot;,&quot;tool_input&quot;:{&quot;command&quot;:&quot;journalctl -u app&quot;}}&#x27; | ai-hooks hook claude
+{&quot;hookSpecificOutput&quot;:{&quot;hookEventName&quot;:&quot;PreToolUse&quot;,&quot;permissionDecision&quot;:&quot;deny&quot;,&quot;permissionDecisionReason&quot;:&quot;ai-hooks [journalctl-unit]: ...&quot;}}</code></pre>
+<h2>PostToolUse: mask what the model sees</h2>
+<p>For <code>PostToolUse</code> the hook walks every string in <code>tool_response</code> and, if anything was redacted, returns the same object as <code>updatedToolOutput</code>. When nothing was redacted it prints nothing and costs about 11 ms.</p>
+<h2>As a plugin</h2>
+<p>The repository is also a one-plugin marketplace: <code>claude plugin marketplace add koalabs-ai/ai-hooks</code>, then <code>claude plugin install ai-hooks@ai-hooks</code>. The binary must be on your <code>PATH</code>.</p>
+<p>See also: <a href="numbers.html">numbers</a>, <a href="faq.html">FAQ</a>.</p>
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>

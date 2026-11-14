@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks numbers: detection, false alarms, latency</title>
+<meta name="description" content="Measured detection and false-alarm rates on the bundled fake corpus, cold-start latency and binary size, with the machine and the method.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/numbers.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks numbers: detection, false alarms, latency"><meta property="og:description" content="Measured detection and false-alarm rates on the bundled fake corpus, cold-start latency and binary size, with the machine and the method.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/numbers.html"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks numbers: detection, false alarms, latency">
+<meta name="twitter:description" content="Measured detection and false-alarm rates on the bundled fake corpus, cold-start latency and binary size, with the machine and the method."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a><a href="claude-code.html">Claude Code</a><a href="kimi-code.html">Kimi Code</a><a href="opencode.html">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html">Any shell</a><a href="numbers.html" aria-current="page">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks numbers: detection, false alarms, latency</h1>
+<p>Measured on one machine: Intel Core Ultra 7 155H, 22 threads, Linux 7.2, Go 1.27.4, while it was busy with other work (load average 7 to 12). Read them as conservative. Reproduce with <code>make selftest</code> and <code>make latency</code>. The per-type table is in <code>docs/DETECTION.md</code>.</p>
+<table>
+<tr><th>Measure</th><th>Result</th></tr>
+<tr><td>Detection, bundled corpus</td><td>123/123 fake secrets redacted, across 113 detector types</td></tr>
+<tr><td>False alarms, bundled corpus</td><td>0/43 clean samples touched</td></tr>
+<tr><td>Known misses</td><td>5: a bare <code>TOKEN=value</code>, a base64-encoded key, a key split by spaces, a password in prose, a value under the minimum length</td></tr>
+<tr><td>Known false alarms</td><td>2: <code>md5sum</code> output (bare 32-hex), <code>password = getpass.getpass(...)</code> in code</td></tr>
+<tr><td>Binary size</td><td>3.9 MB, linux/amd64, stripped, static, no dependencies</td></tr>
+<tr><td>Cold start, hook, allowed command</td><td>5.2 ms mean, 6.1 ms p95 (150 launches) with the machine lightly loaded, against 4.0 ms for a bare process start; at load average 12: 13.7 ms against 13.0 ms. The tool adds roughly 1 to 6 ms to the cost of starting a process.</td></tr>
+<tr><td>Throughput</td><td><code>redact</code> on a 10 MB log with a few secrets: 9 to 12 s of CPU at load average 17 (about 1 MB/s). Built for command output, not log archives.</td></tr>
+<tr><td>Cold start, redact, small text</td><td>about 10 ms; the Python original it descends from: 91 ms</td></tr>
+<tr><td>Output vs the original shape detectors</td><td>byte-identical in compatibility mode (<code>AI_HOOKS_PARITY=1</code>) on 20,000 synthetic texts and thousands of real text files; see PARITY.md in the repository</td></tr>
+</table>
+<p>The corpus is small and written by the authors. It shows the tool does what it says on known shapes, not how it will do on your data. False-alarm reports with a fake example are the most useful contribution.</p>
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>

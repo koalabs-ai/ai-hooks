@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks for Kimi Code: block commands that print secrets</title>
+<meta name="description" content="Guard Kimi Code from running commands that print secrets with an ai-hooks PreToolUse hook. Verified on Kimi Code 2.6.1; output redaction is not possible in Kimi hooks.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/kimi-code.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks for Kimi Code: block commands that print secrets"><meta property="og:description" content="Guard Kimi Code from running commands that print secrets with an ai-hooks PreToolUse hook. Verified on Kimi Code 2.6.1; output redaction is not possible in Kimi hooks.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/kimi-code.html"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks for Kimi Code: block commands that print secrets">
+<meta name="twitter:description" content="Guard Kimi Code from running commands that print secrets with an ai-hooks PreToolUse hook. Verified on Kimi Code 2.6.1; output redaction is not possible in Kimi hooks."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a><a href="claude-code.html">Claude Code</a><a href="kimi-code.html" aria-current="page">Kimi Code</a><a href="opencode.html">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html">Any shell</a><a href="numbers.html">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks for Kimi Code: block commands that print secrets</h1>
+<p><strong>Status: verified</strong> on Kimi Code 2.6.1 in a real session (guard only). Kimi hooks can block a tool call but cannot rewrite its output, so the redaction half is not available there; use <code>ai-hooks exec</code> or a pipe.</p>
+<h2>Setup</h2>
+<p>Add to <code>~/.kimi-code/config.toml</code> (<code>ai-hooks config kimi</code> prints it):</p>
+<pre><code>[[hooks]]
+event = &quot;PreToolUse&quot;
+matcher = &quot;Bash&quot;
+command = &quot;ai-hooks hook kimi&quot;
+timeout = 10</code></pre>
+<p>When Kimi tries <code>journalctl -u app</code> the tool result it gets back is the ai-hooks reason, and it quoted it to the user in the verification run. Kimi reads hooks only from the user-level config, never from a project.</p>
+<p>See also: <a href="any-shell.html">any shell</a>.</p>
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>

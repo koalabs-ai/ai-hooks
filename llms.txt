@@ -1,0 +1,25 @@
+# ai-hooks
+
+> ai-hooks keeps secrets out of AI coding agent transcripts. A command guard blocks shell commands likely to print secrets (cat .env, journalctl -u, docker inspect, printenv...), and a redactor replaces secret-shaped strings in output with <REDACTED:type:fingerprint>. One static Go binary, standard library only, no network access, no telemetry. Apache-2.0.
+
+What it is not: a secret manager, a repository scanner (use gitleaks, trufflehog or detect-secrets for history; `ai-hooks scan` is a lightweight file scanner), or a guarantee. Detection is by shape; known misses are listed in the README. It does not stop an agent that deliberately encodes its output. See docs/SECURITY-MODEL.md.
+
+Verified in real sessions: Claude Code (guard + output rewrite), Kimi Code (guard), opencode (guard + output rewrite), MCP via Claude Code. Implemented from vendor docs, not run: Codex CLI, Cursor, Gemini CLI, GitHub Copilot CLI, Windsurf, Devin.
+
+## Install and wire (copy-paste, idempotent)
+- [AGENTS.md](AGENTS.md): install, `ai-hooks install <harness>`, MCP server, shell shim, CI action, rules for the agent
+- [README.md](README.md): overview, demo, numbers, limits, FAQ
+
+## Reference
+- [docs/DESIGN.md](docs/DESIGN.md): two functions, rule format, adapters
+- [docs/SECURITY-MODEL.md](docs/SECURITY-MODEL.md): threat model, what it does not stop, fingerprint construction
+- [docs/DETECTORS.md](docs/DETECTORS.md): every detector type and the old-name aliases
+- [docs/DETECTION.md](docs/DETECTION.md): detection and false-alarm table by type (bundled fake corpus)
+- [docs/STANDARDS.md](docs/STANDARDS.md): OWASP, CWE, NIST, ISO 27001, PCI, SARIF mapping, with disclaimers
+- [skills/ai-hooks/SKILL.md](skills/ai-hooks/SKILL.md): an agent skill
+- [server.json](server.json): MCP registry entry
+- [action.yml](action.yml): GitHub Action (SARIF scan, or run with redacted output)
+- `ai-hooks rules list --json`, `ai-hooks rules schema`, `ai-hooks scan --format sarif`: machine-readable interfaces
+
+## Optional
+- [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md)

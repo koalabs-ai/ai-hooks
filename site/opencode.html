@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks for opencode: block commands that print secrets</title>
+<meta name="description" content="Guard opencode from printing secrets: an ai-hooks plugin blocks risky shell commands and redacts tool output. Verified on opencode 2.2.7.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/opencode.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks for opencode: block commands that print secrets"><meta property="og:description" content="Guard opencode from printing secrets: an ai-hooks plugin blocks risky shell commands and redacts tool output. Verified on opencode 2.2.7.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/opencode.html"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks for opencode: block commands that print secrets">
+<meta name="twitter:description" content="Guard opencode from printing secrets: an ai-hooks plugin blocks risky shell commands and redacts tool output. Verified on opencode 2.2.7."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a><a href="claude-code.html">Claude Code</a><a href="kimi-code.html">Kimi Code</a><a href="opencode.html" aria-current="page">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html">Any shell</a><a href="numbers.html">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks for opencode: block commands that print secrets</h1>
+<p><strong>Status: verified</strong> on opencode 2.2.7 in a real session: <code>docker inspect web</code> was refused with the ai-hooks message, and a shell command that printed a fake AWS key came back redacted.</p>
+<h2>Setup</h2>
+<pre><code>ai-hooks install opencode            # writes ~/.config/opencode/plugins/ai-hooks.js
+ai-hooks install opencode --project   # or .opencode/plugins/ai-hooks.js in this project
+ai-hooks uninstall opencode</code></pre>
+<p>The plugin uses opencode's server plugin API: a <code>tool.execute.before</code> hook that throws to block, and a <code>tool.execute.after</code> hook that rewrites the result. It starts the binary with arguments (no shell). The shell tool is named <code>shell</code> in opencode 2.x and <code>bash</code> in 1.x; the plugin handles both.</p>
+<p>See also: <a href="mcp.html">MCP</a>, <a href="any-shell.html">any shell</a>.</p>
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>

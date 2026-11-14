@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-hooks: stop AI coding agents from leaking secrets</title>
+<meta name="description" content="ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with &lt;REDACTED:type:fingerprint&gt;. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access.">
+<link rel="canonical" href="https://koalabs-ai.github.io/ai-hooks/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ai-hooks">
+<meta property="og:title" content="ai-hooks: stop AI coding agents from leaking secrets"><meta property="og:description" content="ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with &lt;REDACTED:type:fingerprint&gt;. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access.">
+<meta property="og:url" content="https://koalabs-ai.github.io/ai-hooks/"><meta property="og:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ai-hooks: stop AI coding agents from leaking secrets">
+<meta name="twitter:description" content="ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with &lt;REDACTED:type:fingerprint&gt;. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access."><meta name="twitter:image" content="https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ai-hooks", "applicationCategory": "DeveloperApplication", "operatingSystem": "Linux, macOS", "description": "ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with <REDACTED:type:fingerprint>. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access.", "url": "https://koalabs-ai.github.io/ai-hooks/", "license": "https://www.apache.org/licenses/LICENSE-2.0", "codeRepository": "https://github.com/koalabs-ai/ai-hooks", "programmingLanguage": "Go", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "image": "https://koalabs-ai.github.io/ai-hooks/assets/social-preview.png"}</script>
+</head><body>
+<header><nav aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="claude-code.html">Claude Code</a><a href="kimi-code.html">Kimi Code</a><a href="opencode.html">opencode</a><a href="codex-cli.html">Codex CLI</a><a href="cursor.html">Cursor</a><a href="mcp.html">MCP</a><a href="any-shell.html">Any shell</a><a href="numbers.html">Numbers</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>ai-hooks</h1>
+
+<p class="lead">ai-hooks is a command guard and output redactor in one static Go binary. It blocks commands likely to print secrets and replaces secret-shaped strings in output with &lt;REDACTED:type:fingerprint&gt;. Verified with Claude Code, Kimi Code, opencode and MCP clients; works in any shell. No network access.</p>
+<picture><source media="(prefers-color-scheme: light)" srcset="assets/ai-hooks-demo-light.gif">
+<img src="assets/ai-hooks-demo-dark.gif" width="860" alt="Terminal demo: cat .env leaks a fake AWS key; through ai-hooks redact it becomes REDACTED and user=john is untouched; the guard blocks journalctl -u; the bundled tests print 43/43 detected and 0/26 false alarms."></picture>
+<h2>The problem</h2>
+<p>A coding agent runs <code>cat .env</code> or <code>journalctl -u app</code>. Every key in the output is now in the model provider's logs, in your session history and, if you are unlucky, in a pull request. ai-hooks refuses the risky command with a one-line fix, and masks anything secret-shaped in the output, so the agent keeps working without ever seeing the value.</p>
+<h2>Try it in 10 seconds</h2>
+<pre><code>printf &#x27;user=john\nAWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE\n&#x27; | ai-hooks redact
+# user=john
+# AWS_ACCESS_KEY_ID=&lt;REDACTED:aws-key-id:1a5d44a2&gt;
+
+ai-hooks guard -- &#x27;journalctl -u app&#x27;   # exit 2, one line saying how to repeat it safely
+ai-hooks test --short                    # detection and false-alarm rates on the bundled fake corpus</code></pre>
+<h2>Install</h2>
+<pre><code>go install github.com/koalabs-ai/ai-hooks/cmd/ai-hooks@latest   # once the repository is public
+# or from a checkout:
+make build &amp;&amp; install -m 0755 dist/ai-hooks ~/.local/bin/ai-hooks</code></pre>
+<h2>Guides by harness</h2>
+<ul>
+<li><a href="claude-code.html">Claude Code</a>: verified, guard and output redaction</li>
+<li><a href="opencode.html">opencode</a>: verified, guard and output redaction</li>
+<li><a href="kimi-code.html">Kimi Code</a>: verified, guard only</li>
+<li><a href="mcp.html">MCP</a>: verified with Claude Code's client</li>
+<li><a href="any-shell.html">Any shell</a>: verified, pipes and <code>ai-hooks exec</code></li>
+<li><a href="codex-cli.html">Codex CLI</a>, <a href="cursor.html">Cursor</a> and others: implemented from the docs, not run</li>
+</ul>
+<h2>Numbers and limits</h2>
+<p>On the bundled fake corpus: 43/43 secrets redacted, 0/43 clean samples touched, 5 known misses, 2 known false alarms. See <a href="numbers.html">numbers</a> for the machine and the method, and the <a href="faq.html">FAQ</a> for what it does not do.</p>
+<p>Source: <a href="https://github.com/koalabs-ai/ai-hooks">https://github.com/koalabs-ai/ai-hooks</a> (Apache-2.0).</p>
+
+</main>
+<footer>ai-hooks is Apache-2.0. <a href="https://github.com/koalabs-ai/ai-hooks">Source</a> · Built and used daily at <a href="https://koalabs.ai">KOA Labs</a>.</footer>
+</body></html>
